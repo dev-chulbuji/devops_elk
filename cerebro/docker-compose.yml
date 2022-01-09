@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  cerebro:
+    image: lmenezes/cerebro
+    container_name: cerebro
+    ports:
+      - "9000:9000"
+    environment:
+      ELASTICSEARCH_HOST: "http://es:9200"
+      CEREBRO_PORT: 9000
+
+networks:
+  default:
+    external:
+      name: logging
