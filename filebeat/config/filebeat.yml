@@ -1,5 +1,7 @@
 filebeat.inputs:
 - type: container
+  stream: all # all,stdout,stderr
+  format: auto # auto,docker,cri
   paths:
     - '/var/lib/docker/containers/*/*.log'
 
@@ -16,7 +18,7 @@ output.logstash:
   hosts: ["logstash:5044"]
 
 #output.elasticsearch:
-#  hosts: ["es:9200"]
+#  hosts: ["esm01:9200"]
 #  indices:
 #    - index: "filebeat-%{[agent.version]}-%{+yyyy.MM.dd}"
 

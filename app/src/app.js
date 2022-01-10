@@ -12,4 +12,8 @@ app.get('/', (req, res, next) => {
   res.json(`source ip :: ${sourceIp}`)
 })
 
+app.get('/healthz', (req, res, next) => {
+  res.json({ status: 200 })
+})
+
 app.listen(PORT, () => console.log(`server is running on ${PORT}`))

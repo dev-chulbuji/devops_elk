@@ -8,19 +8,21 @@ filebeat.inputs:
 - type: filestream
   paths:
     - /var/log/nginx/*.log
+  fields:
+    nginx: true
 
-filebeat.modules:
-  - module: nginx
-    access:
-      enabled: true
-      var.paths:
-        - /var/log/nginx/access.log
-    error:
-      enabled: true
-      var.paths:
-        - /var/log/nginx/error.log
-    ingress_controller:
-      enabled: false
+#filebeat.modules:
+#  - module: nginx
+#    access:
+#      enabled: true
+#      var.paths:
+#        - /var/log/nginx/access.log
+#    error:
+#      enabled: true
+#      var.paths:
+#        - /var/log/nginx/error.log
+#    ingress_controller:
+#      enabled: false
 
 setup:
   kibana:
@@ -28,6 +30,10 @@ setup:
   dashboards:
     enabled: true
 
-output.elasticsearch:
-  enabled: true
-  hosts: ["esm01:9200"]
+output:
+  elasticsearch:
+    enabled: false
+    hosts: ["esm01:9200"]
+  logstash:
+    enabled: true
+    hosts: ["logstash:5044"]

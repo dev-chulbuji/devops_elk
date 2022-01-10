@@ -7,4 +7,4 @@ down:
 	docker-compose down
 
 logs:
-	docker-compose logs -fdiscovery.seed_hosts
+	docker-compose logs -f
