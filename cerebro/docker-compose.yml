@@ -6,7 +6,7 @@ services:
     ports:
       - "9000:9000"
     environment:
-      ELASTICSEARCH_HOST: "http://es:9200"
+      ELASTICSEARCH_HOST: "http://esm01:9200"
       CEREBRO_PORT: 9000
 
 networks:

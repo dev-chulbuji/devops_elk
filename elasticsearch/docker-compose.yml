@@ -35,7 +35,7 @@ services:
       ES_SETTING_BOOTSTRAP_MEMORY__LOCK: "true"
       ES_JAVA_OPTS: "-Xmx512m -Xms512m -Xlog:disable"
       node.name: esd01
-      node.roles: data
+      node.roles: data,ingest
       cluster.name: es-cluster
       cluster.initial_master_nodes: esm01
       discovery.seed_hosts: esm01,esd01,esd02
@@ -54,12 +54,19 @@ services:
       ES_SETTING_BOOTSTRAP_MEMORY__LOCK: "true"
       ES_JAVA_OPTS: "-Xmx512m -Xms512m -Xlog:disable"
       node.name: esd02
-      node.roles: data
+      node.roles: data,ingest
       cluster.name: es-cluster
       cluster.initial_master_nodes: esm01
       discovery.seed_hosts: esm01,esd01,esd02
       xpack.security.enabled: "false"
       xpack.monitoring.collection.enabled: "false"
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:7.16.2
+    container_name: metricbeat
+    environment:
+      ELASTICSEARCH_HOSTS: http://esm01:9200
+    volumes:
+      - ./config/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
 
 volumes:
   data01:
